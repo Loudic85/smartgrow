@@ -1,0 +1,480 @@
+:root {
+    /* Light theme variables */
+    --bg-color: #F5F5F5;
+    --text-color: #333333;
+    --primary-green-dark: #1E392A;
+    --primary-green-light: #5D8A66;
+    --primary-green-hover: #4A6F53;
+    --white-color: white;
+    --gray-text: #555;
+    --light-gray-bg: #f0f0f0;
+    --nav-bg: rgba(245, 245, 245, 0.95);
+    --shadow-color: rgba(0,0,0,0.1);
+    --shadow-lighter-color: rgba(0,0,0,0.05);
+    --overlay-bg: rgba(30, 57, 42, 0.9);
+}
+
+body.dark-theme {
+    /* Dark theme variables */
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --primary-green-dark: #5D8A66;
+    --primary-green-light: #8BC34A;
+    --primary-green-hover: #4A6F53;
+    --white-color: #333333;
+    --gray-text: #b0b0b0;
+    --light-gray-bg: #333333;
+    --nav-bg: rgba(26, 26, 26, 0.95);
+    --shadow-color: rgba(255,255,255,0.1);
+    --shadow-lighter-color: rgba(255,255,255,0.05);
+    --overlay-bg: rgba(93, 138, 102, 0.9);
+}
+
+.main-content {
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.main-content.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+
+
+/* ---- Style pour les sections de l'accueil ---- */
+
+.prologue-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.feature-item {
+    text-align: center;
+    max-width: 300px;
+}
+
+.feature-item img {
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.feature-item h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-green-dark);
+    margin-bottom: 10px;
+}
+
+/* ---- 1. Style de base (resets) ---- */
+* {
+    box-sizing: border-box; /* Pour que les paddings n'affectent pas la taille des éléments */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif; /* Police pour le corps du texte */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px; /* Limite la largeur du contenu pour une meilleure lisibilité */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---- 2. Header et bannière (le grand titre au début) ---- */
+.main-header {
+    height: 100vh; /* La hauteur prend toute la fenêtre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/serre-background.png') no-repeat center center/cover;
+    color: var(--white-color);
+}
+
+.main-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem; /* Grande taille de titre */
+    margin-bottom: 10px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-green-light);
+    color: var(--white-color);
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    margin-top: 16px;
+}
+
+.cta-button:hover {
+    background-color: var(--primary-green-hover);
+}
+
+/* ---- 3. Navigation (menu) ---- */
+.main-nav {
+    position: sticky; /* Reste en haut quand on scroll */
+    top: 0;
+    background-color: var(--nav-bg); /* Fond semi-transparent */
+    padding: 10px 0;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    z-index: 1000;
+}
+
+/* Modifie la disposition des éléments dans la nav-container pour aligner le logo */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centre les éléments verticalement */
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-green-light);
+}
+
+
+.nav-logo {
+    height: 60px; /* Changez cette valeur pour redimensionner le logo */
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 100%;
+    width: auto;
+    vertical-align: middle; /* Correction pour l'alignement */
+}
+
+/* Correction: cible .main-nav et s'assure que les ul et li directs sont flexibles */
+.nav-container > ul {
+    display: flex; /* Aligne les éléments du menu horizontalement */
+    align-items: center; /* Centre verticalement les éléments */
+    gap: 30px; /* Espace entre les éléments du menu */
+    list-style: none; /* Supprime les puces/points */
+    padding: 0;
+    margin: 0;
+}
+
+/* Style pour les sous-menus (dropdown) */
+.dropdown {
+    position: relative; /* Contexte de positionnement pour le menu déroulant */
+}
+
+.dropdown-menu {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    top: 100%; /* Se positionne juste en dessous de l'élément parent */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--light-gray-bg);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    list-style: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: max-content; /* S'adapte à la largeur du contenu */
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    padding: 8px 15px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--primary-green-light);
+    color: var(--white-color);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Affiché au survol du parent */
+}
+
+.burger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: var(--nav-bg);
+        flex-direction: column;
+        width: 200px;
+        display: none;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 1rem;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+/* ---- 4. Sections de pages (le contenu) ---- */
+.page-section {
+    padding: 100px 0;
+}
+
+.page-section h2 {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.8rem;
+    color: var(--primary-green-dark);
+}
+
+/* ---- 5. Style de la page équipe (team-grid) ---- */
+.team-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+    gap: 40px; /* Espace entre les membres */
+}
+
+.team-member {
+    background: var(--white-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px; /* Largeur fixe pour un rendu uniforme */
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px); /* Petit effet de survol */
+}
+
+.member-photo {
+    border-radius: 50%; /* Pour une photo de profil ronde */
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid var(--primary-green-light); /* Bordure verte pour un effet stylé */
+}
+
+.team-member h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: var(--primary-green-dark);
+}
+
+.member-role {
+    font-weight: 700;
+    color: var(--gray-text);
+    margin-bottom: 15px;
+}
+
+.team-member ul {
+    list-style-type: none; /* Enlève les puces par défaut */
+    text-align: left;
+    margin-top: 10px;
+}
+
+.team-member li {
+    background: var(--light-gray-bg); /* Un fond léger pour chaque mission */
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border-left: 3px solid var(--primary-green-light); /* Bande verte pour un effet stylé */
+}
+
+.team-member-button {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: var(--primary-green-dark);
+    color: var(--white-color);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.team-member-button:hover {
+    margin-top: 15px;
+    margin-bottom: 7px;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+/* ---- 6. Style de la page galerie (gallery-grid) ---- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 200px; /* Taille fixe pour un rendu uniforme */
+    object-fit: cover; /* Recadre l'image pour qu'elle remplisse l'espace */
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05); /* Effet de zoom au survol */
+    box-shadow: 0 8px 15px var(--shadow-color); /* Using shadow-color for consistency */
+}
+
+/* Style de la page galerie */
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    color: var(--gray-text);
+    font-size: 1.1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.gallery-item {
+    position: relative; /* Pour positionner l'effet de survol */
+    overflow: hidden; /* Cache les éléments qui dépassent de la boîte */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--overlay-bg); /* Un vert foncé semi-transparent */
+    color: var(--white-color);
+    padding: 20px;
+    transform: translateY(100%); /* Cache l'overlay par défaut */
+    transition: transform 0.4s ease;
+    text-align: center;
+}
+
+.gallery-item:hover .overlay {
+    transform: translateY(0); /* Fait apparaître l'overlay au survol */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05); /* Petit zoom sur l'image au survol */
+}
+
+/* ---- 7. Style de la page contact ---- */
+
+.social-link img {
+    height: 30px; /* Taille du logo, ajuste si besoin */
+    margin-right: 10px; /* Espace entre le logo et les liens */
+}
+
+/* ---- 8. Footer (pied de page) ---- */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    background-color: var(--primary-green-dark);
+    color: var(--white-color);
+}
+
+.page-dev {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+    font-style: italic;
+    color:rgb(124, 220, 0);
+}
+
+/* ---- Responsive (Burger Menu) ---- */
+
+.burger {
+    display: none; /* Caché par défaut sur grand écran */
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: block; /* Affiché sur petit écran */
+        position: absolute;
+        right: 20px;
+        top: 15px;
+    }
+
+    .nav-container > ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--nav-bg);
+        position: absolute;
+        top: 70px; /* Hauteur de la nav */
+        left: 0;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px var(--shadow-color);
+    }
+
+    .nav-container > ul.show {
+        display: flex; /* Affiche le menu quand la classe est présente */
+    }
+
+    .nav-container {
+        justify-content: flex-start; /* Aligne le logo à gauche */
+    }
+}
